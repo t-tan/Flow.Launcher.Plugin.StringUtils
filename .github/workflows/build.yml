@@ -38,3 +38,9 @@ jobs:
         cd Flow.Launcher.Plugin.StringUtils
         dotnet publish -c Release -r win-x64 --no-self-contained Flow.Launcher.Plugin.StringUtils.csproj
         7z a -tzip "Flow.Launcher.Plugin.StringUtils.zip" "./bin/Release/win-x64/publish/*"
+
+    - name: Publish
+      uses: softprops/action-gh-release@v1
+      with:
+        files: "Flow.Launcher.Plugin.StringUtils.zip"
+        tag_name: "v${{steps.version.outputs.prop}}"
