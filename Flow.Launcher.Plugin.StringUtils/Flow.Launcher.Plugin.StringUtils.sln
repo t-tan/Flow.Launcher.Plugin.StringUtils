@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flow.Launcher.Plugin.StringUtils", "Flow.Launcher.Plugin.StringUtils.csproj", "{E7E18520-A843-41D1-A3B7-C5DC60824908}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7E18520-A843-41D1-A3B7-C5DC60824908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7E18520-A843-41D1-A3B7-C5DC60824908}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7E18520-A843-41D1-A3B7-C5DC60824908}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7E18520-A843-41D1-A3B7-C5DC60824908}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B683E8BA-9848-44BA-907E-8AE44D30C190}
+	EndGlobalSection
+EndGlobal
