@@ -1,5 +1,8 @@
 name: build
 
+permissions:
+  contents: write
+
 on:
   push:
     branches: [ "main" ]
@@ -44,5 +47,3 @@ jobs:
       with:
         files: "Flow.Launcher.Plugin.StringUtils/Flow.Launcher.Plugin.StringUtils.zip"
         tag_name: "v${{steps.version.outputs.prop}}"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
