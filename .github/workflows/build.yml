@@ -11,6 +11,10 @@ jobs:
 
     runs-on: windows-latest
 
+    defaults:
+      run:
+        working-directory: ./Flow.Launcher.Plugin.StringUtils
+
     steps:
     - uses: actions/checkout@v3
 
@@ -23,7 +27,7 @@ jobs:
       id: version
       uses: notiz-dev/github-action-json-property@release
       with:
-        path: 'Flow.Launcher.Plugin.StringUtils/plugin.json'
+        path: 'plugin.json'
         prop_path: 'Version'
 
     - run: echo ${{steps.version.outputs.prop}}
@@ -33,5 +37,5 @@ jobs:
 
     - name: Build
       run: |
-        dotnet publish -c Release -r win-x64 --no-self-contained Flow.Launcher.Plugin.StringUtils
+        dotnet publish -c Release -r win-x64 --no-self-contained Flow.Launcher.Plugin.StringUtils.csproj
         7z a -tzip "Flow.Launcher.Plugin.StringUtils.zip" "./bin/Release/win-x64/publish/*"
