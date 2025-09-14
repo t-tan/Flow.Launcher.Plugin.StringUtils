@@ -23,7 +23,7 @@ namespace Flow.Launcher.Plugin.StringUtils
 
             if (string.IsNullOrWhiteSpace(query.Search))
             {
-                return QueryHandler.DefaultOptions;
+                return QueryHandler.DefaultOptions(_context);
             }
             else
             {

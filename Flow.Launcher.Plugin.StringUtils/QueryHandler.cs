@@ -11,15 +11,83 @@ namespace Flow.Launcher.Plugin.StringUtils
 {
     internal class QueryHandler
     {
-        public static List<Result> DefaultOptions = new List<Result>
-        {
-            new Result { Title = "uuid", SubTitle = "Generate a random GUID/UUID", IcoPath = @"Images\uuid.png" },
-            new Result { Title = "base64encode", SubTitle = "Encode a string using Base64", IcoPath = @"Images\base64.png" },
-            new Result { Title = "base64decode", SubTitle = "Decode a Base64 encoded string", IcoPath = @"Images\base64.png" },
-            new Result { Title = "escape", SubTitle = "Convert a string/url to its escaped representation", IcoPath = @"Images\url.png" },
-            new Result { Title = "unescape", SubTitle = "Convert a string/url to its unescaped representation", IcoPath = @"Images\url.png" },
-            new Result { Title = "random", SubTitle = "Generate a random string of specified length", IcoPath = @"Images\rnd.png" },
-        };
+        public static List<Result> DefaultOptions(PluginInitContext context){
+            return new List<Result>
+            {
+                new Result
+                {
+                    Title = "uuid",
+                    SubTitle = "Generate a random GUID/UUID",
+                    IcoPath = @"Images\uuid.png",
+                    Action = _ =>
+                    {
+                        context.API.ChangeQuery(
+                            $"{context.CurrentPluginMetadata.ActionKeyword} uuid ");
+                        return false;
+                    }
+                },
+                new Result
+                {
+                    Title = "base64encode",
+                    SubTitle = "Encode a string using Base64",
+                    IcoPath = @"Images\base64.png",
+                    Action = _ =>
+                    {
+                        context.API.ChangeQuery(
+                            $"{context.CurrentPluginMetadata.ActionKeyword} base64encode ");
+                        return false;
+                    }
+                },
+                new Result
+                {
+                    Title = "base64decode",
+                    SubTitle = "Decode a Base64 encoded string",
+                    IcoPath = @"Images\base64.png",
+                    Action = _ =>
+                    {
+                        context.API.ChangeQuery(
+                            $"{context.CurrentPluginMetadata.ActionKeyword} base64decode ");
+                        return false;
+                    }
+                },
+                new Result
+                {
+                    Title = "escape",
+                    SubTitle = "Convert a string/url to its escaped representation",
+                    IcoPath = @"Images\url.png",
+                    Action = _ =>
+                    {
+                        context.API.ChangeQuery(
+                            $"{context.CurrentPluginMetadata.ActionKeyword} escape ");
+                        return false;
+                    }
+                },
+                new Result
+                {
+                    Title = "unescape",
+                    SubTitle = "Convert a string/url to its unescaped representation",
+                    IcoPath = @"Images\url.png",
+                    Action = _ =>
+                    {
+                        context.API.ChangeQuery(
+                            $"{context.CurrentPluginMetadata.ActionKeyword} unescape ");
+                        return false;
+                    }
+                },
+                new Result
+                {
+                    Title = "random",
+                    SubTitle = "Generate a random string of specified length",
+                    IcoPath = @"Images\rnd.png",
+                    Action = _ =>
+                    {
+                        context.API.ChangeQuery(
+                            $"{context.CurrentPluginMetadata.ActionKeyword} random ");
+                        return false;
+                    }
+                },
+            };
+        }
 
         private Result BuildSuccessResult(string title, string iconPath)
         {
