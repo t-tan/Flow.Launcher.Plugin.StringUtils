@@ -32,7 +32,7 @@ namespace Flow.Launcher.Plugin.StringUtils
                 switch (query.FirstSearch)
                 {
                     case "uuid":
-                        return queryHandler.GenerateGuid();
+                        return queryHandler.GenerateGuid(query);
 
                     case "random":
                         return queryHandler.GenerateRandomString(query);

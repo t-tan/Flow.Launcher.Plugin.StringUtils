@@ -104,17 +104,24 @@ namespace Flow.Launcher.Plugin.StringUtils
             };
         }
 
-        public List<Result> GenerateGuid()
+        public List<Result> GenerateGuid(Query query)
         {
             var results = new List<Result>();
-
-            var guid = Guid.NewGuid();
-
             var iconPath = @"Images\uuid.png";
+            Guid inputGuid;
 
-            results.Add(BuildSuccessResult(guid.ToString("D"), iconPath));
-            results.Add(BuildSuccessResult(guid.ToString("N"), iconPath));
-            results.Add(BuildSuccessResult(guid.ToString("B"), iconPath));
+            if (!Guid.TryParse(query.SecondSearch, out inputGuid))
+            {
+                inputGuid = Guid.NewGuid();
+            }
+
+            results.Add(BuildSuccessResult(inputGuid.ToString("D"), iconPath));
+            results.Add(BuildSuccessResult(inputGuid.ToString("N"), iconPath));
+            results.Add(BuildSuccessResult(inputGuid.ToString("B"), iconPath));
+
+            results.Add(BuildSuccessResult(inputGuid.ToString("D").ToUpper(), iconPath));
+            results.Add(BuildSuccessResult(inputGuid.ToString("N").ToUpper(), iconPath));
+            results.Add(BuildSuccessResult(inputGuid.ToString("B").ToUpper(), iconPath));
 
             return results;
         }
