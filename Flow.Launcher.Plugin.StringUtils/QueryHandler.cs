@@ -241,7 +241,8 @@ namespace Flow.Launcher.Plugin.StringUtils
             }
             else
             {
-                var encoded = Uri.EscapeDataString(query.SecondSearch.Trim());
+                var inputStr = query.Search.Replace(query.FirstSearch, string.Empty)?.Trim();
+                var encoded = Uri.EscapeDataString(inputStr);
                 results.Add(BuildSuccessResult(encoded, iconPath));
             }
 
