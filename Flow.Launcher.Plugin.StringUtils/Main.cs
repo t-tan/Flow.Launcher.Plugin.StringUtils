@@ -20,10 +20,11 @@ namespace Flow.Launcher.Plugin.StringUtils
         public List<Result> Query(Query query)
         {
             var results = new List<Result>();
+            var defaultOptions = QueryHandler.DefaultOptions(_context);
 
             if (string.IsNullOrWhiteSpace(query.Search))
             {
-                return QueryHandler.DefaultOptions(_context);
+                return defaultOptions;
             }
             else
             {
@@ -49,8 +50,17 @@ namespace Flow.Launcher.Plugin.StringUtils
                     case "unescape":
                         return queryHandler.UnescapeUrl(query);
 
-                    default:
+                    default: {
+                        foreach(var option in defaultOptions)
+                        {
+                            var optionMatch = _context.API.FuzzySearch(query.Search, option.Title);
+                            if (optionMatch.Score > 0)
+                            {
+                                results.Add(option);
+                            }
+                        }
                         break;
+                    }
                 }
             }
 
