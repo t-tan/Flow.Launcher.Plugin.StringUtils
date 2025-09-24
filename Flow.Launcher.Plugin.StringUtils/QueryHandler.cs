@@ -176,7 +176,8 @@ namespace Flow.Launcher.Plugin.StringUtils
             }
             else
             {
-                var bytes = Encoding.UTF8.GetBytes(query.SecondSearch.Trim());
+                var inputStr = query.Search.Replace(query.FirstSearch, string.Empty)?.Trim();
+                var bytes = Encoding.UTF8.GetBytes(inputStr);
                 var encoded = Convert.ToBase64String(bytes);
                 results.Add(BuildSuccessResult(encoded, iconPath));
             }
