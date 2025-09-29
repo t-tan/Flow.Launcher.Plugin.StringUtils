@@ -50,8 +50,23 @@ namespace Flow.Launcher.Plugin.StringUtils
                     case "unescape":
                         return queryHandler.UnescapeUrl(query);
 
-                    case "email":
+                                        case "email":
                         return queryHandler.GenerateRandomEmail(query);
+
+                    case "phone":
+                        return queryHandler.GeneratePhoneNumber(query);
+
+                    case "username":
+                        return queryHandler.GenerateUsername(query);
+
+                    case "color":
+                        return queryHandler.GenerateColor(query);
+
+                    case "lorem":
+                        return queryHandler.GenerateLoremIpsum(query);
+
+                    case "creditcard":
+                        return queryHandler.GenerateCreditCard(query);
 
                     default: {
                         foreach(var option in defaultOptions)

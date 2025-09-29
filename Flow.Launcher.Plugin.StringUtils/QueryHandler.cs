@@ -74,7 +74,7 @@ namespace Flow.Launcher.Plugin.StringUtils
                         return false;
                     }
                 },
-                new Result
+                                new Result
                 {
                     Title = "random",
                     SubTitle = "Generate a random string of specified length",
@@ -95,6 +95,66 @@ namespace Flow.Launcher.Plugin.StringUtils
                     {
                         context.API.ChangeQuery(
                             $"{context.CurrentPluginMetadata.ActionKeyword} email ");
+                        return false;
+                    }
+                },
+                new Result
+                {
+                    Title = "phone",
+                    SubTitle = "Generate random phone numbers",
+                    IcoPath = @"Images\icon.png",
+                    Action = _ =>
+                    {
+                        context.API.ChangeQuery(
+                            $"{context.CurrentPluginMetadata.ActionKeyword} phone ");
+                        return false;
+                    }
+                },
+                new Result
+                {
+                    Title = "username",
+                    SubTitle = "Generate creative usernames",
+                    IcoPath = @"Images\icon.png",
+                    Action = _ =>
+                    {
+                        context.API.ChangeQuery(
+                            $"{context.CurrentPluginMetadata.ActionKeyword} username ");
+                        return false;
+                    }
+                },
+                new Result
+                {
+                    Title = "color",
+                    SubTitle = "Generate random color codes (hex, rgb, hsl)",
+                    IcoPath = @"Images\icon.png",
+                    Action = _ =>
+                    {
+                        context.API.ChangeQuery(
+                            $"{context.CurrentPluginMetadata.ActionKeyword} color ");
+                        return false;
+                    }
+                },
+                new Result
+                {
+                    Title = "lorem",
+                    SubTitle = "Generate Lorem Ipsum text",
+                    IcoPath = @"Images\icon.png",
+                    Action = _ =>
+                    {
+                        context.API.ChangeQuery(
+                            $"{context.CurrentPluginMetadata.ActionKeyword} lorem ");
+                        return false;
+                    }
+                },
+                new Result
+                {
+                    Title = "creditcard",
+                    SubTitle = "Generate test credit card numbers",
+                    IcoPath = @"Images\icon.png",
+                    Action = _ =>
+                    {
+                        context.API.ChangeQuery(
+                            $"{context.CurrentPluginMetadata.ActionKeyword} creditcard ");
                         return false;
                     }
                 },
@@ -351,8 +411,244 @@ namespace Flow.Launcher.Plugin.StringUtils
             var email5 = $"{lastName}.{firstName}@{domain}";
             results.Add(BuildSuccessResult(email5, iconPath));
 
+                        return results;
+        }
+
+        
+
+        public List<Result> GeneratePhoneNumber(Query query)
+        {
+            var results = new List<Result>();
+            var iconPath = @"Images\icon.png";
+            var random = new Random();
+
+            // US format
+            var usPhone = $"({random.Next(200, 999)}) {random.Next(200, 999)}-{random.Next(1000, 9999)}";
+            results.Add(BuildSuccessResult(usPhone, iconPath));
+
+            // International format
+            var intPhone = $"+1-{random.Next(200, 999)}-{random.Next(200, 999)}-{random.Next(1000, 9999)}";
+            results.Add(BuildSuccessResult(intPhone, iconPath));
+
+            // Simple format
+            var simplePhone = $"{random.Next(200, 999)}-{random.Next(200, 999)}-{random.Next(1000, 9999)}";
+            results.Add(BuildSuccessResult(simplePhone, iconPath));
+
+            // European format
+            var euroPhone = $"+49 {random.Next(10, 99)} {random.Next(1000, 9999)} {random.Next(1000, 9999)}";
+            results.Add(BuildSuccessResult(euroPhone, iconPath));
+
             return results;
+        }
+
+        public List<Result> GenerateUsername(Query query)
+        {
+            var results = new List<Result>();
+            var iconPath = @"Images\icon.png";
+
+            var adjectives = new[] { "cool", "smart", "fast", "bright", "happy", "lucky", "strong", "wild", "bold", "swift", "clever", "brave", "quiet", "loud", "sharp", "smooth", "rough", "gentle", "fierce", "calm" };
+            var nouns = new[] { "tiger", "eagle", "wolf", "lion", "bear", "shark", "falcon", "panther", "dragon", "phoenix", "warrior", "ninja", "wizard", "knight", "ranger", "hunter", "pilot", "captain", "chief", "master" };
+            var random = new Random();
+
+            // Adjective + Noun
+            var username1 = $"{adjectives[random.Next(adjectives.Length)]}{nouns[random.Next(nouns.Length)]}";
+            results.Add(BuildSuccessResult(username1, iconPath));
+
+            // Adjective + Noun + Number
+            var username2 = $"{adjectives[random.Next(adjectives.Length)]}{nouns[random.Next(nouns.Length)]}{random.Next(10, 999)}";
+            results.Add(BuildSuccessResult(username2, iconPath));
+
+            // Noun + Number
+            var username3 = $"{nouns[random.Next(nouns.Length)]}{random.Next(1000, 9999)}";
+            results.Add(BuildSuccessResult(username3, iconPath));
+
+            // Random letters + numbers
+            var username4 = GenerateRandomString("abcdefghijklmnopqrstuvwxyz0123456789", random.Next(6, 12));
+            results.Add(BuildSuccessResult(username4, iconPath));
+
+            return results;
+        }
+
+        public List<Result> GenerateColor(Query query)
+        {
+            var results = new List<Result>();
+            var iconPath = @"Images\icon.png";
+            var random = new Random();
+
+            // Generate random RGB values
+            var r = random.Next(0, 256);
+            var g = random.Next(0, 256);
+            var b = random.Next(0, 256);
+
+            // Hex color
+            var hexColor = $"#{r:X2}{g:X2}{b:X2}";
+            results.Add(BuildSuccessResult(hexColor, iconPath));
+
+            // RGB color
+            var rgbColor = $"rgb({r}, {g}, {b})";
+            results.Add(BuildSuccessResult(rgbColor, iconPath));
+
+            // HSL color (approximate conversion)
+            var hsl = RgbToHsl(r, g, b);
+            var hslColor = $"hsl({(int)hsl.h}, {(int)hsl.s}%, {(int)hsl.l}%)";
+            results.Add(BuildSuccessResult(hslColor, iconPath));
+
+            // RGBA with transparency
+            var rgbaColor = $"rgba({r}, {g}, {b}, 0.{random.Next(1, 10)})";
+            results.Add(BuildSuccessResult(rgbaColor, iconPath));
+
+            return results;
+        }
+
+        public List<Result> GenerateLoremIpsum(Query query)
+        {
+            var results = new List<Result>();
+            var iconPath = @"Images\icon.png";
+
+            var loremWords = new[] {
+                "lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit", "sed", "do",
+                "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore", "magna", "aliqua", "enim",
+                "ad", "minim", "veniam", "quis", "nostrud", "exercitation", "ullamco", "laboris", "nisi",
+                "aliquip", "ex", "ea", "commodo", "consequat", "duis", "aute", "irure", "in", "reprehenderit",
+                "voluptate", "velit", "esse", "cillum", "fugiat", "nulla", "pariatur", "excepteur", "sint",
+                "occaecat", "cupidatat", "non", "proident", "sunt", "culpa", "qui", "officia", "deserunt",
+                "mollit", "anim", "id", "est", "laborum"
+            };
+
+            var random = new Random();
+
+            // Short paragraph (20-30 words)
+            var shortText = string.Join(" ", loremWords.OrderBy(x => random.Next()).Take(random.Next(20, 31)));
+            results.Add(new Result
+            {
+                Title = shortText.Length > 60 ? shortText.Substring(0, 60) + "..." : shortText,
+                SubTitle = "Short Lorem Ipsum (20-30 words)",
+                IcoPath = iconPath,
+                Action = _ =>
+                {
+                    Clipboard.SetText(shortText);
+                    return true;
+                }
+            });
+
+            // Medium paragraph (50-70 words)
+            var mediumText = string.Join(" ", loremWords.OrderBy(x => random.Next()).Take(random.Next(50, 71)));
+            results.Add(new Result
+            {
+                Title = mediumText.Length > 60 ? mediumText.Substring(0, 60) + "..." : mediumText,
+                SubTitle = "Medium Lorem Ipsum (50-70 words)",
+                IcoPath = iconPath,
+                Action = _ =>
+                {
+                    Clipboard.SetText(mediumText);
+                    return true;
+                }
+            });
+
+            // Long paragraph (100+ words)
+            var longText = string.Join(" ", loremWords.OrderBy(x => random.Next()).Take(random.Next(100, 151)));
+            results.Add(new Result
+            {
+                Title = longText.Length > 60 ? longText.Substring(0, 60) + "..." : longText,
+                SubTitle = "Long Lorem Ipsum (100+ words)",
+                IcoPath = iconPath,
+                Action = _ =>
+                {
+                    Clipboard.SetText(longText);
+                    return true;
+                }
+            });
+
+            return results;
+        }
+
+        public List<Result> GenerateCreditCard(Query query)
+        {
+            var results = new List<Result>();
+            var iconPath = @"Images\icon.png";
+            var random = new Random();
+
+            // Test credit card numbers (these are fake and for testing only)
+            var visaTest = "4111 1111 1111 1111";
+            results.Add(new Result
+            {
+                Title = visaTest,
+                SubTitle = "Test Visa Card (for testing only)",
+                IcoPath = iconPath,
+                Action = _ =>
+                {
+                    Clipboard.SetText(visaTest);
+                    return true;
+                }
+            });
+
+            var mastercardTest = "5555 5555 5555 4444";
+            results.Add(new Result
+            {
+                Title = mastercardTest,
+                SubTitle = "Test Mastercard (for testing only)",
+                IcoPath = iconPath,
+                Action = _ =>
+                {
+                    Clipboard.SetText(mastercardTest);
+                    return true;
+                }
+            });
+
+            var amexTest = "3782 8224 6310 005";
+            results.Add(new Result
+            {
+                Title = amexTest,
+                SubTitle = "Test American Express (for testing only)",
+                IcoPath = iconPath,
+                Action = _ =>
+                {
+                    Clipboard.SetText(amexTest);
+                    return true;
+                }
+            });
+
+            return results;
+        }
+
+        // Helper methods
+        private string GenerateRandomString(string allowedChars, int length)
+        {
+            var random = new Random();
+            var chars = new char[length];
+            for (int i = 0; i < length; i++)
+            {
+                chars[i] = allowedChars[random.Next(0, allowedChars.Length)];
+            }
+            return new string(chars);
+        }
+
+        private (double h, double s, double l) RgbToHsl(int r, int g, int b)
+        {
+            double rd = r / 255.0;
+            double gd = g / 255.0;
+            double bd = b / 255.0;
+
+            double max = Math.Max(rd, Math.Max(gd, bd));
+            double min = Math.Min(rd, Math.Min(gd, bd));
+
+            double h = 0, s = 0, l = (max + min) / 2;
+
+            if (max != min)
+            {
+                double d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+                if (max == rd) h = (gd - bd) / d + (gd < bd ? 6 : 0);
+                else if (max == gd) h = (bd - rd) / d + 2;
+                else if (max == bd) h = (rd - gd) / d + 4;
+
+                h /= 6;
+            }
+
+            return (h * 360, s * 100, l * 100);
         }
 
     }
 }
+

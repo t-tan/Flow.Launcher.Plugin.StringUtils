@@ -2,7 +2,7 @@
 	"ID": "2972879D-1702-48A7-BA50-CA8352A6AA74",
 	"ActionKeyword": "str",
 	"Name": "StringUtils",
-	"Description": "a multi-purpose plugin that supports UUID/GUID/random string generation, random email generation, base64/URL encoding and decoding",
+	"Description": "a multi-purpose plugin that supports UUID/GUID/random string generation, random email generation, phone number generation, username generation, color generation, lorem ipsum text generation, credit card number generation, and more",
 	"Author": "t-tan",
 	"Version": "1.0.3",
 	"Language": "csharp",
