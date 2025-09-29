@@ -1,12 +1,12 @@
 {
-    "ID": "2972879D-1702-48A7-BA50-CA8352A6AA74",
-    "ActionKeyword": "str",
-    "Name": "StringUtils",
-    "Description": "a multi-purpose plugin that supports UUID/GUID/random string generation, base64/URL encoding and decoding",
-    "Author": "t-tan",
-    "Version": "1.0.3",
-    "Language": "csharp",
-    "Website": "https://github.com/t-tan/Flow.Launcher.Plugin.StringUtils",
-    "IcoPath": "Images/icon.png",
-    "ExecuteFileName": "Flow.Launcher.Plugin.StringUtils.dll"
+	"ID": "2972879D-1702-48A7-BA50-CA8352A6AA74",
+	"ActionKeyword": "str",
+	"Name": "StringUtils",
+	"Description": "a multi-purpose plugin that supports UUID/GUID/random string generation, random email generation, base64/URL encoding and decoding",
+	"Author": "t-tan",
+	"Version": "1.0.3",
+	"Language": "csharp",
+	"Website": "https://github.com/t-tan/Flow.Launcher.Plugin.StringUtils",
+	"IcoPath": "Images/icon.png",
+	"ExecuteFileName": "Flow.Launcher.Plugin.StringUtils.dll"
 }

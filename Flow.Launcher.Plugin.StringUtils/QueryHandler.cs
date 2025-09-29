@@ -86,6 +86,18 @@ namespace Flow.Launcher.Plugin.StringUtils
                         return false;
                     }
                 },
+                new Result
+                {
+                    Title = "email",
+                    SubTitle = "Generate a random email address",
+                    IcoPath = @"Images\email.png",
+                    Action = _ =>
+                    {
+                        context.API.ChangeQuery(
+                            $"{context.CurrentPluginMetadata.ActionKeyword} email ");
+                        return false;
+                    }
+                },
             };
         }
 
@@ -270,6 +282,74 @@ namespace Flow.Launcher.Plugin.StringUtils
                 var decoded = Uri.UnescapeDataString(query.SecondSearch.Trim());
                 results.Add(BuildSuccessResult(decoded, iconPath));
             }
+
+            return results;
+        }
+
+        public List<Result> GenerateRandomEmail(Query query)
+        {
+            var results = new List<Result>();
+            var iconPath = @"Images\email.png";
+
+            // Common email domains
+            var domains = new[]
+            {
+                "gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "live.com",
+                "aol.com", "icloud.com", "protonmail.com", "yandex.com", "mail.com",
+                "zoho.com", "fastmail.com", "tutanota.com", "gmx.com", "web.de"
+            };
+
+            // Common first names for more realistic emails
+            var firstNames = new[]
+            {
+                "john", "jane", "mike", "sarah", "david", "lisa", "chris", "emma",
+                "alex", "jessica", "ryan", "amanda", "james", "jennifer", "robert",
+                "michelle", "william", "ashley", "michael", "emily", "daniel", "samantha",
+                "matthew", "nicole", "anthony", "stephanie", "mark", "elizabeth",
+                "donald", "helen", "steven", "deborah", "paul", "dorothy", "andrew",
+                "lisa", "joshua", "nancy", "kenneth", "karen", "kevin", "betty",
+                "brian", "helen", "george", "sandra", "timothy", "donna", "jose",
+                "carol", "larry", "ruth", "jeffrey", "sharon", "frank", "michelle"
+            };
+
+            // Common last names
+            var lastNames = new[]
+            {
+                "smith", "johnson", "williams", "brown", "jones", "garcia", "miller",
+                "davis", "rodriguez", "martinez", "hernandez", "lopez", "gonzalez",
+                "wilson", "anderson", "thomas", "taylor", "moore", "jackson", "martin",
+                "lee", "perez", "thompson", "white", "harris", "sanchez", "clark",
+                "ramirez", "lewis", "robinson", "walker", "young", "allen", "king",
+                "wright", "scott", "torres", "nguyen", "hill", "flores", "green",
+                "adams", "nelson", "baker", "hall", "rivera", "campbell", "mitchell"
+            };
+
+            var random = new Random();
+            var domain = domains[random.Next(domains.Length)];
+            
+            // Generate different types of email addresses
+            var firstName = firstNames[random.Next(firstNames.Length)];
+            var lastName = lastNames[random.Next(lastNames.Length)];
+            
+            // Type 1: firstname.lastname@domain
+            var email1 = $"{firstName}.{lastName}@{domain}";
+            results.Add(BuildSuccessResult(email1, iconPath));
+            
+            // Type 2: firstname@domain
+            var email2 = $"{firstName}@{domain}";
+            results.Add(BuildSuccessResult(email2, iconPath));
+            
+            // Type 3: firstname + random number@domain
+            var email3 = $"{firstName}{random.Next(10, 999)}@{domain}";
+            results.Add(BuildSuccessResult(email3, iconPath));
+            
+            // Type 4: firstname + lastname initial@domain
+            var email4 = $"{firstName}{lastName[0]}@{domain}";
+            results.Add(BuildSuccessResult(email4, iconPath));
+            
+            // Type 5: lastname + firstname@domain
+            var email5 = $"{lastName}.{firstName}@{domain}";
+            results.Add(BuildSuccessResult(email5, iconPath));
 
             return results;
         }

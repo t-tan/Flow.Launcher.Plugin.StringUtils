@@ -50,6 +50,9 @@ namespace Flow.Launcher.Plugin.StringUtils
                     case "unescape":
                         return queryHandler.UnescapeUrl(query);
 
+                    case "email":
+                        return queryHandler.GenerateRandomEmail(query);
+
                     default: {
                         foreach(var option in defaultOptions)
                         {
